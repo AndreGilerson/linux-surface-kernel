@@ -932,15 +932,25 @@ static int create_sdw_dailink(struct snd_soc_card *card,
 		}
 
 		/* create stream name according to first link id */
-		if (ctx->append_dai_type)
+		if (ctx->append_dai_type) {
 			name = devm_kasprintf(dev, GFP_KERNEL,
 					      sdw_stream_name[stream + 2],
 					      ffs(sof_end->link_mask) - 1,
 					      type_strings[sof_end->dai_info->dai_type]);
-		else
+		} else if (sof_end->dai_info->dai_type == SOC_SDW_DAI_TYPE_AMP ||
+			   sof_end->dai_info->dai_type == SOC_SDW_DAI_TYPE_MIC) {
+			/*
+			 * Force SmartAmp/SmartMic name so sof_sdw_get_tplg_files()
+			 * picks the matching sof-sdca-{1amp,mic}-id<N>.tplg sub-topology.
+			 */
+			name = devm_kasprintf(dev, GFP_KERNEL, "%s-%s",
+					      stream == SNDRV_PCM_STREAM_PLAYBACK ? "Playback" : "Capture",
+					      type_strings[sof_end->dai_info->dai_type]);
+		} else {
 			name = devm_kasprintf(dev, GFP_KERNEL,
 					      sdw_stream_name[stream],
 					      ffs(sof_end->link_mask) - 1);
+		}
 		if (!name)
 			return -ENOMEM;
 
