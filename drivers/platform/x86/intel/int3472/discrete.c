@@ -391,8 +391,6 @@ static int skl_int3472_handle_gpio_resources(struct acpi_resource *ares,
 			dev_err(int3472->dev, "Failed to register type 0x02x: %d\n", type, ret);
 		    }
 		    break;
-		case 0x10:
-		    break;
 		default: /* Never reached */
 			ret = -EINVAL;
 			break;
