@@ -168,11 +168,11 @@ static const s64 vd55g0_ev_bias_menu[] = {
 /*
  * DT equivalents: "VCORE", "VDDIO", "VANA"
  * INT3472 on Surface Pro 11 registers: GPIO type 0x0B → "avdd",
- * type 0x10 → "pwr2". Only 2 supplies provided via INT3472.
+ * type 0x10 → "dovdd". Only 2 supplies provided via INT3472.
  */
 static const char * const vd55g0_supply_name[] = {
 	"avdd",
-	"pwr2",
+	"dovdd",
 };
 
 static const s64 link_freq[] = {
