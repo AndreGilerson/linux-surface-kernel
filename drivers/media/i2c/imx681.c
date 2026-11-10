@@ -434,7 +434,6 @@ static int imx681_init_state(struct v4l2_subdev *sd,
  * against a code the sensor is no longer delivering.
  */
 static int imx681_set_pad_format(struct v4l2_subdev *sd,
-				 const struct v4l2_subdev_client_info *ci,
 				 struct v4l2_subdev_state *state,
 				 struct v4l2_subdev_format *fmt)
 {
@@ -457,7 +456,6 @@ static int imx681_set_pad_format(struct v4l2_subdev *sd,
 }
 
 static int imx681_get_selection(struct v4l2_subdev *sd,
-				const struct v4l2_subdev_client_info *ci,
 				struct v4l2_subdev_state *state,
 				struct v4l2_subdev_selection *sel)
 {
